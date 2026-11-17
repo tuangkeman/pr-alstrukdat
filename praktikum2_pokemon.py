@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import streamlit as st
 from dotenv import load_dotenv
 
-# Baca konfigurasi dari file .env
 load_dotenv()
 BASE_URL = os.getenv("POKEAPI_BASE_URL")
 
@@ -16,7 +15,6 @@ if not BASE_URL:
     st.error("POKEAPI_BASE_URL belum diatur. Buat file .env (lihat .env.example).")
     st.stop()
 
-# Input jumlah Pokémon
 limit = st.slider("Pilih jumlah Pokémon yang ingin ditampilkan:", 5, 30, 10)
 
 
@@ -47,11 +45,9 @@ except requests.RequestException:
     st.error("Gagal mengambil data dari PokeAPI.")
     st.stop()
 
-# Tabel data
 st.subheader("Data Pokémon")
 st.dataframe(df)
 
-# Metric statistik dalam 3 kolom
 col1, col2, col3 = st.columns(3)
 with col1:
     st.metric("Rata-rata Tinggi", f"{df['height'].mean():.2f}")
@@ -61,8 +57,6 @@ with col3:
     st.metric("Rata-rata Ability", f"{df['abilities'].mean():.2f}")
 
 st.subheader("📊 Visualisasi Data Pokémon")
-
-# Bar chart dan barh chart sejajar
 colA, colB = st.columns(2)
 
 with colA:
@@ -84,7 +78,6 @@ with colB:
     st.pyplot(fig2)
     plt.close(fig2)
 
-# Scatter dan histogram sejajar
 colC, colD = st.columns(2)
 
 with colC:
